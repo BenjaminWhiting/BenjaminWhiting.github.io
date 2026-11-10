@@ -61,6 +61,6 @@ A tab's name must not match a project `id`, since both live after the `#`.
 | `index.html` | The page: the tabs, the About text, the catalog's frame |
 | `projects.js` | The catalog entries |
 | `assets/style.css` | All styling. Dark only, on purpose |
-| `assets/site.js` | Draws the catalog, filters and search |
+| `assets/site.js` | Draws the catalog and its search, and switches tabs |
 | `404.html` | Shown for any address that does not exist |
 | `.nojekyll` | Tells GitHub Pages to serve the files as they are |

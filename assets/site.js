@@ -1,7 +1,6 @@
 (function () {
   "use strict";
 
-  const ALL = "All";
   const CATALOG_VIEW = "catalog";
 
   // Each [data-view] block is a tab's content; only one is shown at a time.
@@ -10,21 +9,16 @@
   const tabs = [...document.querySelectorAll(".tabs a[href^='#']")];
   const HOME_VIEW = views[0].id;
 
-  // projects.js is newest-first, so the oldest entry gets number 1.
-  const projects = (window.PROJECTS || []).map((p, i, list) => ({
-    ...p,
-    number: list.length - i,
-  }));
+  const projects = window.PROJECTS || [];
   const ordered = [...projects].sort(
     (a, b) => Boolean(b.featured) - Boolean(a.featured)
   );
 
-  const state = { kind: ALL, query: "" };
+  let query = "";
   const openIds = new Set();
 
   const $ = (id) => document.getElementById(id);
   const entriesEl = $("entries");
-  const chipsEl = $("chips");
   const searchEl = $("search");
   const countEl = $("count");
   const emptyEl = $("empty");
@@ -43,9 +37,8 @@
   }
 
   function matches(p) {
-    if (state.kind !== ALL && p.kind !== state.kind) return false;
-    const query = state.query.trim().toLowerCase();
-    if (!query) return true;
+    const words = query.trim().toLowerCase();
+    if (!words) return true;
     const haystack = [
       p.title,
       p.kind,
@@ -57,7 +50,7 @@
     ]
       .join(" ")
       .toLowerCase();
-    return query.split(/\s+/).every((word) => haystack.includes(word));
+    return words.split(/\s+/).every((word) => haystack.includes(word));
   }
 
   function setOpen(id, open) {
@@ -101,7 +94,6 @@
     );
 
     const head = el("div", { class: "entry-head" }, [
-      el("span", { class: "entry-no", text: String(p.number).padStart(3, "0") }),
       el("div", { class: "entry-main" }, [
         el("h3", { class: "entry-title" }, [toggle]),
         el("p", { class: "entry-summary", text: p.summary }),
@@ -141,26 +133,6 @@
     ]);
   }
 
-  function renderChips() {
-    const kinds = [...new Set(projects.map((p) => p.kind))].sort();
-    chipsEl.replaceChildren(
-      ...[ALL, ...kinds].map((kind) => {
-        const chip = el("button", {
-          class: "chip",
-          type: "button",
-          "aria-pressed": String(kind === state.kind),
-          text: kind,
-        });
-        chip.addEventListener("click", () => {
-          state.kind = kind;
-          renderChips();
-          renderEntries();
-        });
-        return chip;
-      })
-    );
-  }
-
   function renderEntries() {
     const visible = ordered.filter(matches);
     entriesEl.replaceChildren(...visible.map(renderEntry));
@@ -172,11 +144,9 @@
         : visible.length + " of " + projects.length + " entries";
   }
 
-  function resetFilters() {
-    state.kind = ALL;
-    state.query = "";
+  function clearSearch() {
+    query = "";
     searchEl.value = "";
-    renderChips();
     renderEntries();
   }
 
@@ -205,19 +175,18 @@
     const project = projects.find((p) => p.id === id);
     if (!project) return;
     showView(CATALOG_VIEW);
-    if (!matches(project)) resetFilters();
+    if (!matches(project)) clearSearch();
     setOpen(id, true);
     $(id).scrollIntoView();
   }
 
   searchEl.addEventListener("input", () => {
-    state.query = searchEl.value;
+    query = searchEl.value;
     renderEntries();
   });
-  $("reset").addEventListener("click", resetFilters);
+  $("reset").addEventListener("click", clearSearch);
   window.addEventListener("hashchange", route);
 
-  renderChips();
   renderEntries();
   $("controls").hidden = projects.length === 0;
   showView(HOME_VIEW);

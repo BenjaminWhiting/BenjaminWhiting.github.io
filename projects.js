@@ -1,15 +1,13 @@
 /*
   The catalog. To add a project, copy an entry and put it at the TOP of the list.
-  Keep the list newest-first: catalog numbers are assigned from the bottom up,
-  so the oldest entry is always 001 and existing numbers never change.
+  Entries appear on the page in the order they are listed here.
 
   Fields
     id          Required. Short slug, unique. Becomes the shareable link:
                 https://benjaminwhiting.github.io/#your-id
     title       Required.
     year        Required. When it was built.
-    kind        Required. One or two words. Each distinct kind becomes a filter
-                button, so reuse existing ones where they fit.
+    kind        Required. One or two words, shown beside the entry.
     summary     Required. One sentence, shown in the collapsed row.
     description Optional. A paragraph of context, shown when the row is opened.
     highlights  Optional. The talking points: what was hard, what was clever,
@@ -84,26 +82,6 @@ window.PROJECTS = [
     links: [
       { label: "Live demo", url: "https://benjaminwhiting.github.io/orbital-command/" },
       { label: "Source", url: "https://github.com/BenjaminWhiting/orbital-command" },
-    ],
-  },
-  {
-    id: "data-source-manager-mock",
-    title: "Data Source Manager",
-    year: 2026,
-    kind: "Mockup",
-    summary:
-      "A UI mockup for a schema-driven data ingestion system: where a source lives, how to authenticate, and what shape the data takes.",
-    description:
-      "A thought experiment answering one question: what would the configuration surface for a generic ingestion engine look like? There is no backend. The Run button simulates a pipeline and randomly succeeds or fails so both states can be demonstrated.",
-    highlights: [
-      "Authentication is a first-class, named entity (Basic, mTLS, API key, Bearer, OAuth2, HMAC). Everything else refers to a rule by name, so no credential is entered anywhere else.",
-      "The connection and data forms change per source type: REST, GraphQL, SFTP, S3, webhook, database.",
-      "A working schema importer for each type: OpenAPI JSON, GraphQL SDL, CSV headers, sample JSON, and CREATE TABLE DDL.",
-      "The README lists its own rough edges, including the 800-line single component that should have been split.",
-    ],
-    stack: ["React", "Vite"],
-    links: [
-      { label: "Source", url: "https://github.com/BenjaminWhiting/data-source-manager-mock" },
     ],
   },
 ];

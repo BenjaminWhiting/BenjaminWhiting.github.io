@@ -20,6 +20,29 @@
 */
 window.PROJECTS = [
   {
+    id: "fun-with-fishtanks",
+    title: "Fun with Fishtanks",
+    year: 2026,
+    kind: "3D printing",
+    summary:
+      "An experiment in pairing a 3D printer with an AI, using a 36-inch aquarium as the test bench.",
+    description:
+      "I wanted to know what an AI coding assistant could do once the result had to exist in the real world, where a part either fits the glass or it doesn't. I described each part in plain words. The AI wrote it as code, checked it, sliced it and sent it to the printer. Then I held the result against the tank and said what was wrong. Two weeks of that made a riser for the light, a 1:48 Japanese boardwalk with a crooked bathhouse on its corner, and a floating ring for the plants.",
+    highlights: [
+      "Every part is an OpenSCAD file with its sizes as settings at the top, so changing a part means changing a number.",
+      "A preflight script follows every move in a print file, arcs included, to make sure it stays inside what the printer can reach. It exists because one file carried another printer's start-up moves.",
+      "An overhang check slices each model every 0.2 mm and reports anything that would start in mid-air, so nothing needs supports.",
+      "The AI can upload a file and start it over the local network, but only after I have said go for that exact file.",
+      "The bathhouse went through thirteen versions in three days, then was cut into seven parts that plug together without glue.",
+      "A ring that looked fine in a render was far too chunky in the hand. Small fit tests now come before big prints.",
+    ],
+    stack: ["OpenSCAD", "Python", "Bambu Studio", "Bambu Lab A1 mini", "Claude Code"],
+    links: [
+      { label: "Website", url: "https://benjaminwhiting.github.io/fun-with-fishtanks/" },
+      { label: "Source", url: "https://github.com/BenjaminWhiting/fun-with-fishtanks" },
+    ],
+  },
+  {
     id: "ramen-nights",
     title: "Ramen Nights",
     year: 2026,

@@ -22,8 +22,13 @@ are documented in the comment at the top of that file.
   highlights: ["What was hard.", "What I would do differently."],
   stack: ["Python"],
   links: [{ label: "Source", url: "https://github.com/BenjaminWhiting/my-project" }],
+  image: "assets/shots/my-project.webp",
 },
 ```
+
+The picture is optional. It sits to the left of the entry and links to the
+entry's first link, so put the live site or demo first. Make it 720 × 480 (3:2)
+and keep it small; WebP at around 30 KB is plenty.
 
 Commit and push to `main`, and the page updates a minute or so later.
 
@@ -62,5 +67,6 @@ A tab's name must not match a project `id`, since both live after the `#`.
 | `projects.js` | The catalog entries |
 | `assets/style.css` | All styling. Dark only, on purpose |
 | `assets/site.js` | Draws the catalog and its search, and switches tabs |
+| `assets/shots/` | One picture per catalog entry |
 | `404.html` | Shown for any address that does not exist |
 | `.nojekyll` | Tells GitHub Pages to serve the files as they are |

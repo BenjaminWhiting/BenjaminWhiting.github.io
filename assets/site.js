@@ -93,7 +93,20 @@
       ])
     );
 
+    // The picture repeats the first link, so it is left out of the tab order
+    // and hidden from screen readers; the labelled link is the real one.
+    const firstLink = (p.links || [])[0];
+    const shotImg =
+      p.image &&
+      el("img", { src: p.image, alt: "", width: "720", height: "480", loading: "lazy" });
+    const shot =
+      shotImg &&
+      (firstLink
+        ? el("a", { class: "entry-shot", href: firstLink.url, tabindex: "-1", "aria-hidden": "true" }, [shotImg])
+        : el("div", { class: "entry-shot" }, [shotImg]));
+
     const head = el("div", { class: "entry-head" }, [
+      shot,
       el("div", { class: "entry-main" }, [
         el("h3", { class: "entry-title" }, [toggle]),
         el("p", { class: "entry-summary", text: p.summary }),
@@ -127,7 +140,10 @@
     ]);
     panel.hidden = !open;
 
-    return el("li", { class: open ? "entry is-open" : "entry", id: p.id }, [
+    const classes = ["entry"];
+    if (open) classes.push("is-open");
+    if (shot) classes.push("has-shot");
+    return el("li", { class: classes.join(" "), id: p.id }, [
       head,
       panel,
     ]);

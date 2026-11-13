@@ -16,6 +16,8 @@
     links       Optional. Any number of { label, url }. For a project with its
                 own GitHub Pages site, the url is
                 https://benjaminwhiting.github.io/<repo-name>/
+    image       Optional. A picture shown beside the entry, which links to the
+                first of its links. 720 x 480 (3:2), in assets/shots/.
     featured    Optional. true pins the entry to the top of the page.
 */
 window.PROJECTS = [
@@ -41,6 +43,7 @@ window.PROJECTS = [
       { label: "Website", url: "https://benjaminwhiting.github.io/fun-with-fishtanks/" },
       { label: "Source", url: "https://github.com/BenjaminWhiting/fun-with-fishtanks" },
     ],
+    image: "assets/shots/fun-with-fishtanks.webp",
   },
   {
     id: "ramen-nights",
@@ -63,6 +66,7 @@ window.PROJECTS = [
     links: [
       { label: "Website", url: "https://benjaminwhiting.github.io/ramen-nights-site/" },
     ],
+    image: "assets/shots/ramen-nights.webp",
   },
   {
     id: "scorched-dom",
@@ -84,6 +88,7 @@ window.PROJECTS = [
       { label: "Live demo", url: "https://benjaminwhiting.github.io/scorched-dom/" },
       { label: "Source", url: "https://github.com/BenjaminWhiting/scorched-dom" },
     ],
+    image: "assets/shots/scorched-dom.webp",
   },
   {
     id: "orbital-command",
@@ -106,5 +111,6 @@ window.PROJECTS = [
       { label: "Live demo", url: "https://benjaminwhiting.github.io/orbital-command/" },
       { label: "Source", url: "https://github.com/BenjaminWhiting/orbital-command" },
     ],
+    image: "assets/shots/orbital-command.webp",
   },
 ];
